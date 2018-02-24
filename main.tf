@@ -14,6 +14,10 @@ data "aws_iam_policy_document" "emr_assume_role" {
   }
 }
 
+data "aws_subnet" "emr_subnet" {
+  id = "${var.subnet_id}"
+}
+
 resource "aws_iam_role" "emr_service_role" {
   name               = "emr${var.environment}ServiceRole"
   assume_role_policy = "${data.aws_iam_policy_document.emr_assume_role.json}"
@@ -80,6 +84,17 @@ resource "aws_security_group" "emr_slave" {
   }
 }
 
+resource "aws_security_group" "service_access" {
+  vpc_id                 = "${var.vpc_id}"
+  revoke_rules_on_delete = true
+
+  tags {
+    Name        = "sg${var.name}ServiceAccess"
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
+  }
+}
+
 resource "aws_security_group_rule" "master_allow_all_egress" {
   type            = "egress"
   from_port       = 0
@@ -114,6 +129,7 @@ resource "aws_emr_cluster" "cluster" {
     subnet_id                         = "${var.subnet_id}"
     emr_managed_master_security_group = "${aws_security_group.emr_master.id}"
     emr_managed_slave_security_group  = "${aws_security_group.emr_slave.id}"
+    service_access_security_group     = "${data.aws_subnet.emr_subnet.map_public_ip_on_launch ? "" : aws_security_group.service_access.id}"
     instance_profile                  = "${aws_iam_instance_profile.emr_ec2_instance_profile.arn}"
   }
 
