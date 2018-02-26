@@ -16,6 +16,7 @@ resource "aws_emr_cluster" "cluster" {
     subnet_id                         = "${var.subnet_id}"
     emr_managed_master_security_group = "${aws_security_group.emr_master.id}"
     emr_managed_slave_security_group  = "${aws_security_group.emr_slave.id}"
+    additional_master_security_groups = "${var.additional_master_security_groups}"
     service_access_security_group     = "${data.aws_subnet.emr_subnet.map_public_ip_on_launch ? "" : aws_security_group.service_access.id}"
     instance_profile                  = "${aws_iam_instance_profile.emr_ec2_instance_profile.arn}"
   }
