@@ -2,6 +2,8 @@
 
 A Terraform module to create an Amazon Web Services (AWS) Elastic MapReduce (EMR) cluster.
 
+*Forked from https://github.com/azavea/terraform-aws-emr-cluster to support additional EMR features. See [CHANGELOG.md](https://github.com/chrissng/terraform-aws-emr-cluster/releases)*
+
 ## Usage
 
 ```hcl
@@ -10,9 +12,9 @@ data "template_file" "emr_configurations" {
 }
 
 module "emr" {
-  source = "github.com/azavea/terraform-aws-emr-cluster?ref=0.1.0"
+  source = "github.com/chrissng/terraform-aws-emr-cluster?ref=0.2"
 
-  name          = "DatarpocCluster"
+  name          = "DataprocCluster"
   vpc_id        = "vpc-20f74844"
   release_label = "emr-5.9.0"
 
@@ -40,6 +42,39 @@ module "emr" {
       instance_type  = "m3.xlarge"
       instance_count = "1"
       bid_price      = "0.30"
+      autoscaling_policy = <<EOF
+{
+"Constraints": {
+  "MinCapacity": 1,
+  "MaxCapacity": 2
+},
+"Rules": [
+  {
+    "Name": "ScaleOutMemoryPercentage",
+    "Description": "Scale out if YARNMemoryAvailablePercentage is less than 15",
+    "Action": {
+      "SimpleScalingPolicyConfiguration": {
+        "AdjustmentType": "CHANGE_IN_CAPACITY",
+        "ScalingAdjustment": 1,
+        "CoolDown": 300
+      }
+    },
+    "Trigger": {
+      "CloudWatchAlarmDefinition": {
+        "ComparisonOperator": "LESS_THAN",
+        "EvaluationPeriods": 1,
+        "MetricName": "YARNMemoryAvailablePercentage",
+        "Namespace": "AWS/ElasticMapReduce",
+        "Period": 300,
+        "Statistic": "AVERAGE",
+        "Threshold": 15.0,
+        "Unit": "PERCENT"
+      }
+    }
+  }
+]
+}
+EOF
     },
   ]
 
