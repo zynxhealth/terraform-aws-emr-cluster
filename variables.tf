@@ -45,6 +45,10 @@ variable "instance_groups" {
   type = "list"
 }
 
+variable "additional_master_security_groups" {
+  default = ""
+}
+
 variable "bootstrap_name" {}
 
 variable "bootstrap_uri" {}
