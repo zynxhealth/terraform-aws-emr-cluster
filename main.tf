@@ -7,7 +7,7 @@ data "aws_subnet" "emr_subnet" {
 #
 
 # uses custom AMI
-resource "aws_emr_cluster" "cluster" {
+resource "aws_emr_cluster" "cluster-ami" {
   count          = "${var.use_custom_ami ? 1 : 0}"
   name           = "${var.name}"
   custom_ami_id  = "${var.custom_ami_id}"
@@ -46,7 +46,7 @@ resource "aws_emr_cluster" "cluster" {
 }
 
 # does not use custom AMI
-resource "aws_emr_cluster" "cluster" {
+resource "aws_emr_cluster" "cluster-no-ami" {
   count          = "${var.use_custom_ami ? 0 : 1}"
   name           = "${var.name}"
   release_label  = "${var.release_label}"
