@@ -8,7 +8,9 @@ variable "environment" {
 
 variable "name" {}
 
-variable "custom_ami_id" {}
+variable "custom_ami_id" {
+  default = ""
+}
 
 variable "vpc_id" {}
 
