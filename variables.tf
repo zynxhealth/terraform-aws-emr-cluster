@@ -8,6 +8,8 @@ variable "environment" {
 
 variable "name" {}
 
+variable "custom_ami_id" {}
+
 variable "vpc_id" {}
 
 variable "release_label" {

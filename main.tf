@@ -7,6 +7,7 @@ data "aws_subnet" "emr_subnet" {
 #
 resource "aws_emr_cluster" "cluster" {
   name           = "${var.name}"
+  custom_ami_id  = "${var.custom_ami_id}"
   release_label  = "${var.release_label}"
   applications   = "${var.applications}"
   configurations = "${var.configurations}"
