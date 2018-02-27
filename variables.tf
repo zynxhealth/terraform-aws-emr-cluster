@@ -8,9 +8,11 @@ variable "environment" {
 
 variable "name" {}
 
-variable "custom_ami_id" {
-  default = "ami-68097514"
+variable "use_custom_ami" {
+  default = false
 }
+
+variable "custom_ami_id" {}
 
 variable "vpc_id" {}
 
