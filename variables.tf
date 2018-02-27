@@ -9,7 +9,7 @@ variable "environment" {
 variable "name" {}
 
 variable "custom_ami_id" {
-  default = ""
+  default = "ami-68097514"
 }
 
 variable "vpc_id" {}
