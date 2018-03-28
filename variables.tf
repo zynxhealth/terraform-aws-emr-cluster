@@ -9,7 +9,7 @@ variable "environment" {
 variable "name" {}
 
 variable "custom_ami_id" {
-  default = []
+  default = "${aws_ami.default.image_id}"
 }
 
 variable "vpc_id" {}
