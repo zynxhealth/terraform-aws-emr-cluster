@@ -1,4 +1,4 @@
-data "aws_ami" "nat_ami" {
+data "aws_ami" "default" {
   most_recent = true
 
   filter {
