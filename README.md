@@ -2,8 +2,8 @@
 
 A Terraform module to create an Amazon Web Services (AWS) Elastic MapReduce (EMR) cluster.
 
-_Forked from https://github.com/azavea/terraform-aws-emr-cluster to support additional EMR features.
-See [CHANGELOG.md](https://github.com/chrissng/terraform-aws-emr-cluster/releases)_
+_Forked from <https://github.com/azavea/terraform-aws-emr-cluster> to support additional EMR
+features. See [CHANGELOG.md](https://github.com/chrissng/terraform-aws-emr-cluster/releases)_
 
 ## Usage
 
