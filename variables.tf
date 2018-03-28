@@ -8,13 +8,15 @@ variable "environment" {
 
 variable "name" {}
 
+variable "custom_ami_id" {}
+
 // variable "custom_ami_id" {
-//   default = "${aws_ami.default.image_id}"
+//   default = "${data.aws_ami.default.image_id}"
 // }
 
-resource "null_resource" "custom_ami_id" {
-  value = "${data.aws_ami.default.image_id}"
-}
+// resource "null_resource" "custom_ami_id" {
+//   value = "${data.aws_ami.default.image_id}"
+// }
 
 variable "vpc_id" {}
 
