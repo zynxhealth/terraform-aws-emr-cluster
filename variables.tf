@@ -13,7 +13,7 @@ variable "name" {}
 // }
 
 resource "null_resource" "custom_ami_id" {
-  value = "${aws_ami.default.most_recent}"
+  value = "${data.aws_ami.default.image_id}"
 }
 
 variable "vpc_id" {}
