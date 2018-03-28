@@ -13,7 +13,7 @@ data "template_file" "emr_configurations" {
 }
 
 module "emr" {
-  source = "github.com/chrissng/terraform-aws-emr-cluster?ref=0.3"
+  source = "github.com/chrissng/terraform-aws-emr-cluster?ref=0.3-emr5"
 
   name          = "DataprocCluster"
   vpc_id        = "vpc-20f74844"
