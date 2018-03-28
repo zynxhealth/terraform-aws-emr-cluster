@@ -2,7 +2,8 @@
 
 A Terraform module to create an Amazon Web Services (AWS) Elastic MapReduce (EMR) cluster.
 
-*Forked from https://github.com/azavea/terraform-aws-emr-cluster to support additional EMR features. See [CHANGELOG.md](https://github.com/chrissng/terraform-aws-emr-cluster/releases)*
+_Forked from <https://github.com/azavea/terraform-aws-emr-cluster> to support additional EMR
+features. See [CHANGELOG.md](https://github.com/chrissng/terraform-aws-emr-cluster/releases)_
 
 ## Usage
 
@@ -12,10 +13,11 @@ data "template_file" "emr_configurations" {
 }
 
 module "emr" {
-  source = "github.com/chrissng/terraform-aws-emr-cluster?ref=0.2"
+  source = "github.com/chrissng/terraform-aws-emr-cluster?ref=0.3-emr5"
 
   name          = "DataprocCluster"
   vpc_id        = "vpc-20f74844"
+  custom_ami_id = "${module.emr.default_ami_id}"
   release_label = "emr-5.9.0"
 
   applications = [
@@ -101,7 +103,8 @@ EOF
 - `bootstrap_name` - Name for the bootstrap action
 - `bootstrap_uri` - S3 URI for the bootstrap action script
 - `bootstrap_args` - A list of arguments to the bootstrap action script (default: `[]`)
-- `log_uri` - S3 URI of the EMR log destination, must begin with `s3n://` and end with trailing slashes
+- `log_uri` - S3 URI of the EMR log destination, must begin with `s3n://` and end with trailing
+  slashes
 - `project` - Name of project this cluster is for (default: `Unknown`)
 - `environment` - Name of environment this cluster is targeting (default: `Unknown`)
 
