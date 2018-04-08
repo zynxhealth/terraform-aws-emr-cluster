@@ -13,12 +13,11 @@ data "template_file" "emr_configurations" {
 }
 
 module "emr" {
-  source = "github.com/chrissng/terraform-aws-emr-cluster?ref=0.3-emr5"
+  source = "github.com/chrissng/terraform-aws-emr-cluster?ref=0.2.1-with-iam"
 
   name          = "DataprocCluster"
   vpc_id        = "vpc-20f74844"
-  custom_ami_id = "${module.emr.default_ami_id}"
-  release_label = "emr-5.9.0"
+  release_label = "emr-4.7.1"
 
   applications = [
     "Hadoop",

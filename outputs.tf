@@ -53,7 +53,3 @@ output "iam_emr_autoscaling_assume_role_policy" {
 output "iam_emr_autoscaling_role_policy_arn" {
   value = "${aws_iam_role_policy_attachment.emr_autoscaling_role.policy_arn}"
 }
-
-output "default_ami_id" {
-  value = "${data.aws_ami.default.image_id}"
-}
