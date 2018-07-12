@@ -1,33 +1,51 @@
 variable "project" {
-  default = "Unknown"
+  description = "Name of project this cluster is for"
+  default     = "Unknown"
 }
 
 variable "environment" {
-  default = "Unknown"
+  description = "Name of environment this cluster is targeting"
+  default     = "Unknown"
 }
 
-variable "name" {}
+variable "name" {
+  description = "Name of EMR cluster"
+}
 
-variable "custom_ami_id" {}
+variable "custom_ami_id" {
+  description = "Custom AMI ID to base the EMR EC2 instance on"
+}
 
-variable "vpc_id" {}
+variable "vpc_id" {
+  description = "ID of VPC meant to house cluster"
+}
 
 variable "release_label" {
-  default = "emr-5.8.0"
+  default     = "emr-5.7.0"
+  description = "EMR release version to use"
 }
 
 variable "applications" {
-  default = ["Spark"]
-  type    = "list"
+  description = "List of EMR release applications"
+  default     = ["Spark"]
+  type        = "list"
 }
 
-variable "configurations" {}
+variable "configurations" {
+  description = "JSON array of EMR application configurations"
+}
 
-variable "key_name" {}
+variable "key_name" {
+  description = "EC2 key pair name"
+}
 
-variable "subnet_id" {}
+variable "subnet_id" {
+  description = "Subnet used to house the EMR nodes"
+}
 
 variable "instance_groups" {
+  description = "List of objects for each desired instance group"
+
   default = [
     {
       name           = "MasterInstanceGroup"
@@ -48,16 +66,23 @@ variable "instance_groups" {
 }
 
 variable "additional_master_security_groups" {
-  default = ""
+  description = "Additional master security groups to place the EMR EC2 instances in"
 }
 
-variable "bootstrap_name" {}
+variable "bootstrap_name" {
+  description = "Name for the bootstrap action"
+}
 
-variable "bootstrap_uri" {}
+variable "bootstrap_uri" {
+  description = "S3 URI for the bootstrap action script"
+}
 
 variable "bootstrap_args" {
-  default = []
-  type    = "list"
+  description = "List of arguments to the bootstrap action script"
+  default     = []
+  type        = "list"
 }
 
-variable "log_uri" {}
+variable "log_uri" {
+  description = "S3 URI of the EMR log destination, must begin with `s3n://` and end with trailing"
+}
