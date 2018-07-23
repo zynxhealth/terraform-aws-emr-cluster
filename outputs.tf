@@ -102,3 +102,8 @@ output "default_ami_id" {
   description = "The most recent suitable AMI ID for EMR to base on"
   value       = "${data.aws_ami.default.image_id}"
 }
+
+output "tags" {
+  description = "Tags applied to all EMR instances"
+  value       = "${aws_emr_cluster.cluster.tags}"
+}
