@@ -42,7 +42,7 @@ resource "aws_emr_cluster" "cluster" {
         map(
           "Name", "${var.name}",
           "Project", "${var.project}",
-          "Environment", "${var.environment}",
+          "Environment", "${var.environment}"
         )
       )
     )
