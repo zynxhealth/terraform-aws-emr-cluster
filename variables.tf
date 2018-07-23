@@ -85,8 +85,8 @@ variable "bootstrap_args" {
 
 variable "custom_tags" {
   description = "Custom tags to add to the default EMR tags"
-  default     = []
-  type        = "list"
+  default     = {}
+  type        = "map"
 }
 
 variable "log_uri" {

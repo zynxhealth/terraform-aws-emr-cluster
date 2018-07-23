@@ -35,12 +35,12 @@ resource "aws_emr_cluster" "cluster" {
   log_uri      = "${var.log_uri}"
   service_role = "${aws_iam_role.emr_service_role.arn}"
 
-  tags = "${concat(
+  tags = "${merge(
     "${var.custom_tags}",
-    list(map(
+    map(
       "Name", "${var.name}",
       "Project", "${var.project}",
       "Environment", "${var.environment}"
-    ))
+    )
   )}"
 }
