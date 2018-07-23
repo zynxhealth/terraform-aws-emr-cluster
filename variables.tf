@@ -83,6 +83,12 @@ variable "bootstrap_args" {
   type        = "list"
 }
 
+variable "custom_tags" {
+  description = "Custom tags to add to the default EMR tags"
+  default     = []
+  type        = "list"
+}
+
 variable "log_uri" {
   description = "S3 URI of the EMR log destination, must begin with `s3n://` and end with trailing"
 }
